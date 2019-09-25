@@ -39,18 +39,15 @@ class DaisyFlowerSkill(MycroftSkill):
         self.register_intent(how_are_you_intent,
                              self.handle_how_are_you_intent)
        
-    def get_user_response(self, dialog):
-        response = self.get_response(dialog)
-        return response
 
     def handle_who_are_you_intent(self, message):
         self.speak_dialog("who.am.i")
-        somethingOnMind = self.get_user_response("something.on.mind")
+        somethingOnMind = self.get_response('something.on.mind')
         if somethingOnMind == "yes":
-            userHasOnMind = self.get_user_response("whats.on.your.mind")
+            userHasOnMind = self.get_response('whats.on.your.mind')
             self.speak(self.translate("i.am.sorry.to.hear") + userHasOnMind)
         else: 
-            wantsPoem = self.get_user_response("do.you.want.poem")
+            wantsPoem = self.get_response('do.you.want.poem')
             if wantsPoem == "yes":
                 self.speak_dialog("speak.poem")
             else: 
