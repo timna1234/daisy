@@ -38,11 +38,7 @@ class DaisyFlowerSkill(MycroftSkill):
             require("HowAreYouKeyword").build()
         self.register_intent(how_are_you_intent,
                              self.handle_how_are_you_intent)
-
-        hello_world_intent = IntentBuilder("HelloWorldIntent"). \
-            require("HelloWorldKeyword").build()
-        self.register_intent(hello_world_intent,
-                             self.handle_hello_world_intent)
+       
 
     def handle_who_are_you_intent(self, message):
         self.speak_dialog("who.am.i")
