@@ -20,7 +20,7 @@ from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill
 from mycroft.util.log import getLogger
 
-__author__ = 'eward'
+__author__ = 'macikmir'
 
 LOGGER = getLogger(__name__)
 
@@ -45,13 +45,21 @@ class DaisyFlowerSkill(MycroftSkill):
                              self.handle_hello_world_intent)
 
     def handle_who_are_you_intent(self, message):
-        self.speak_dialog("who.are.you")
+        self.speak_dialog("who.am.i")
+        somethingOnMind = self.get_user_response("something.on.mind")
+        if somethingOnMind == "yes":
+            userHasOnMind = self.get_user_response("whats.on.your.mind")
+            self.speak(self.translate("i.am.sorry.to.hear") + userHasOnMind)
+        else: 
+            wantsPoem = self.get_user_response("do.you.want.poem")
+                if wantsPoem == "yes":
+                    self.speak_dialog("speak.poem")
+                else: 
+                    self.speak_dialog("ok.talk.later")
 
     def handle_how_are_you_intent(self, message):
         self.speak_dialog("how.are.you")
 
-    def handle_hello_world_intent(self, message):
-        self.speak_dialog("hello.world")
 
     def stop(self):
         pass
