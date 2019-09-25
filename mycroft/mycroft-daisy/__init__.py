@@ -48,10 +48,10 @@ class DaisyFlowerSkill(MycroftSkill):
             self.speak(self.translate("i.am.sorry.to.hear") + userHasOnMind)
         else: 
             wantsPoem = self.get_user_response("do.you.want.poem")
-                if wantsPoem == "yes":
-                    self.speak_dialog("speak.poem")
-                else: 
-                    self.speak_dialog("ok.talk.later")
+            if wantsPoem == "yes":
+                self.speak_dialog("speak.poem")
+            else: 
+                self.speak_dialog("ok.talk.later")
 
     def handle_how_are_you_intent(self, message):
         self.speak_dialog("how.are.you")
