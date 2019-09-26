@@ -50,17 +50,18 @@ class DaisyFlowerSkill(MycroftSkill):
     def handle_who_are_you_intent(self, message):
         pixels.speak()
         self.speak_dialog("who.am.i",expect_response=False)
-        somethingOnMind = self.get_response('something.on.mind')
+        #somethingOnMind = self.get_response('something.on.mind')
+        somethingOnMind = self.ask_yesno('something.on.mind')
         pixels.listen()
         if somethingOnMind == "yes":
             pixels.speak()
-            userHasOnMind = self.get_response('whats.on.your.mind')
+            userHasOnMind = self.ask_yesno('whats.on.your.mind')
             pixels.listen()
             userHasOnMindTransformed = userHasOnMind.replace('i', 'you', 1)
             self.speak(self.translate("i.am.sorry.to.hear") + " " + userHasOnMindTransformed,expect_response=False)
         else:
             pixels.speak() 
-            wantsPoem = self.get_response('do.you.want.poem')
+            wantsPoem = self.ask_yesno('do.you.want.poem')
             pixels.listen
             if wantsPoem == "yes":
                 pixels.speak()
