@@ -21,6 +21,7 @@ from mycroft.skills.core import MycroftSkill
 from mycroft.util.log import getLogger
 
 from pixels import pixels
+import humidityReader
 
 __author__ = 'macikmir'
 
@@ -41,32 +42,35 @@ class DaisyFlowerSkill(MycroftSkill):
             require("HowAreYouKeyword").build()
         self.register_intent(how_are_you_intent,
                              self.handle_how_are_you_intent)
+
+        self.humidityReaderInstance = humidityReader.I2C_Humidity_Reader()
+        
        
 
     def handle_who_are_you_intent(self, message):
-        pixels.speak
+        pixels.speak()
         self.speak_dialog("who.am.i",expect_response=False)
         somethingOnMind = self.get_response('something.on.mind')
-        pixels.listen
+        pixels.listen()
         if somethingOnMind == "yes":
-            pixels.speak
+            pixels.speak()
             userHasOnMind = self.get_response('whats.on.your.mind')
-            pixels.listen
+            pixels.listen()
             userHasOnMindTransformed = userHasOnMind.replace('i', 'you', 1)
             self.speak(self.translate("i.am.sorry.to.hear") + " " + userHasOnMindTransformed,expect_response=False)
         else:
-            pixels.speak 
+            pixels.speak() 
             wantsPoem = self.get_response('do.you.want.poem')
             pixels.listen
             if wantsPoem == "yes":
-                pixels.speak
+                pixels.speak()
                 self.speak_dialog("speak.poem",expect_response=False)
             else:
-                pixels.speak 
+                pixels.speak() 
                 self.speak_dialog("ok.talk.later",expect_response=False)
 
     def handle_how_are_you_intent(self, message):
-        self.speak_dialog("how.are.you")
+        self.speak(self.translate("how.are.you") + " " + self.humidityReaderInstance.get_data(),expect_response=False)
 
 
     def stop(self):
