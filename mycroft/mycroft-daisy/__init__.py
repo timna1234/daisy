@@ -41,17 +41,17 @@ class DaisyFlowerSkill(MycroftSkill):
        
 
     def handle_who_are_you_intent(self, message):
-        self.speak_dialog("who.am.i")
+        self.speak_dialog("who.am.i",expect_response=False)
         somethingOnMind = self.get_response('something.on.mind')
         if somethingOnMind == "yes":
             userHasOnMind = self.get_response('whats.on.your.mind')
-            self.speak(self.translate("i.am.sorry.to.hear") + userHasOnMind)
+            self.speak(self.translate("i.am.sorry.to.hear") + userHasOnMind,expect_response=False)
         else: 
             wantsPoem = self.get_response('do.you.want.poem')
             if wantsPoem == "yes":
-                self.speak_dialog("speak.poem")
+                self.speak_dialog("speak.poem",expect_response=False)
             else: 
-                self.speak_dialog("ok.talk.later")
+                self.speak_dialog("ok.talk.later",expect_response=False)
 
     def handle_how_are_you_intent(self, message):
         self.speak_dialog("how.are.you")
