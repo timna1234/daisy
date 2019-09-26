@@ -45,7 +45,7 @@ class DaisyFlowerSkill(MycroftSkill):
         somethingOnMind = self.get_response('something.on.mind')
         if somethingOnMind == "yes":
             userHasOnMind = self.get_response('whats.on.your.mind')
-            userHasOnMind.replace('I', 'you', 1)
+            userHasOnMind.replace('i', 'you', 1)
             self.speak(self.translate("i.am.sorry.to.hear") + " " + userHasOnMind,expect_response=False)
         else: 
             wantsPoem = self.get_response('do.you.want.poem')
