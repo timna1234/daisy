@@ -20,6 +20,8 @@ from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill
 from mycroft.util.log import getLogger
 
+from pixels import pixels
+
 __author__ = 'macikmir'
 
 LOGGER = getLogger(__name__)
@@ -30,6 +32,7 @@ class DaisyFlowerSkill(MycroftSkill):
         super(DaisyFlowerSkill, self).__init__(name="DaisyFlowerSkill")
 
     def initialize(self):
+
         who_are_you_intent = IntentBuilder("WhoAreYouIntent"). \
             require("WhoAreYouKeyword").build()
         self.register_intent(who_are_you_intent, self.handle_who_are_you_intent)
@@ -41,17 +44,25 @@ class DaisyFlowerSkill(MycroftSkill):
        
 
     def handle_who_are_you_intent(self, message):
+        pixels.speak
         self.speak_dialog("who.am.i",expect_response=False)
         somethingOnMind = self.get_response('something.on.mind')
+        pixels.listen
         if somethingOnMind == "yes":
+            pixels.speak
             userHasOnMind = self.get_response('whats.on.your.mind')
+            pixels.listen
             userHasOnMindTransformed = userHasOnMind.replace('i', 'you', 1)
             self.speak(self.translate("i.am.sorry.to.hear") + " " + userHasOnMindTransformed,expect_response=False)
-        else: 
+        else:
+            pixels.speak 
             wantsPoem = self.get_response('do.you.want.poem')
+            pixels.listen
             if wantsPoem == "yes":
+                pixels.speak
                 self.speak_dialog("speak.poem",expect_response=False)
-            else: 
+            else:
+                pixels.speak 
                 self.speak_dialog("ok.talk.later",expect_response=False)
 
     def handle_how_are_you_intent(self, message):
